@@ -1,3 +1,5 @@
+import numpy as np
+
 def L96(y, F):
     """
     This function models the Lorenz 96 Model
