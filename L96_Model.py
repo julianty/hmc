@@ -6,6 +6,8 @@ def L96(y, F):
         Args:
             y(array): the state vector for current timestep
             F(float): the Lorenz 96 forcing term
+        Returns:
+            yprime: the vector of derivatives
     """
     # Find dimensionality
     D = len(y) 
