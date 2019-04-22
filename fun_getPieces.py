@@ -1,16 +1,17 @@
 import numpy as np
 
 def fun_getPieces(X, nu, dt):
-    Xup1 = np.roll(X, -1, 0)
-    Xdown1 = np.roll(X, 1, 0)
-    Xdown2 = np.roll(X, 2, 0)
+    Xu1 = np.roll(X, -1, 0)
+    Xd1 = np.roll(X, 1, 0)
+    Xd2 = np.roll(X, 2, 0)
+    
     Xleft1 = np.roll(X, -1, 1)
     
-    Z = X + dt/2* (np.multiply(Xup1 - Xdown2, Xdown1) - X + nu)
-    Zup1 = np.roll(Z, -1, 0)
-    Zdown1 = np.roll(Z, 1, 0)
-    Zdown2 = np.roll(Z, 2, 0)
+    Xleft1u1 = np.roll(Xleft1, -1, 0)
+    Xleft1d1 = np.roll(Xleft1, 1, 0)
+    Xleft1d2 = np.roll(Xleft1, 2, 0)
     
-    hX = X + dt * (np.multiply(Zup1 - Zdown2, Zdown1) - Z + nu)
+    hX = (X + dt/2*(np.multiply(Xu1 - Xd2, Xd1) - X + nu) +
+        dt/2*(np.multiply(Xleft1u1 - Xleft1d2, Xleft1d1) - Xleft1 + nu))
     
-    return Xup1, Xdown2, Xdown1, Xleft1, Zup1, Zdown2, Zdown1, hX
+    return Xu1, Xd1, Xd2, Xleft1, hX
